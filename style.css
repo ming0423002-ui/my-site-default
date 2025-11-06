@@ -1,0 +1,211 @@
+/* ==================================================== 
+   style.css — 전체 스타일 (주석 풍부)
+   ==================================================== */
+
+/* -------------------------
+   루트 변수 (색상/폰트 등 전체 테마 관리)
+   ------------------------- */
+:root {
+  --bg: #f5f5f5;
+  --white: #ffffff;
+  --text: #333333;
+  --subtext: #777777;
+  --border: #dddddd;
+  --accent: #555555;
+}
+
+/* 기본 리셋 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 본문 기본 스타일 */
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* -------------------------
+   헤더 (소개)
+   ------------------------- */
+.site-header {
+  text-align: center;
+  padding: 70px 20px 40px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: var(--subtext);
+  font-size: 1.2rem;
+  margin-top: 8px;
+}
+
+.intro-text {
+  color: var(--subtext);
+  margin-top: 15px;
+  font-size: 1rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* -------------------------
+   대표 이미지 (메인)
+   ------------------------- */
+.main-image {
+  margin-top: 30px;
+}
+
+.main-image img {
+  max-width: 320px;
+  width: 90%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: block;
+  margin: 18px auto 0;
+}
+
+/* -------------------------
+   태그 버튼
+   ------------------------- */
+.filter-nav {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-btn {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* -------------------------
+   갤러리 섹션
+   ------------------------- */
+#gallery-section {
+  display: none;
+  padding: 40px 20px;
+}
+
+.gallery {
+  display: none;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.gallery h2 {
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: var(--text);
+}
+
+/* -------------------------
+   ✅ Masonry (벽돌형) 이미지 레이아웃
+   -------------------------
+   - column-count: 한 줄에 몇 개의 세로 열을 만들지
+   - column-gap: 열 사이 간격
+   - margin-bottom: 이미지 사이의 세로 간격
+   ------------------------- */
+.image-grid {
+  column-count: 3;         /* 한 줄에 사진 3열 */
+  column-gap: 16px;        /* 열 간격 */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.image-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 16px;     /* 이미지 아래 간격 */
+  border-radius: 10px;
+  object-fit: contain;
+  background: var(--white);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  cursor: zoom-in;
+}
+
+/* 마우스 오버 시 살짝 부드럽게 확대 */
+.image-grid img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* -------------------------
+   푸터
+   ------------------------- */
+.site-footer {
+  text-align: center;
+  padding: 30px 10px;
+  font-size: 0.85rem;
+  color: var(--subtext);
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+
+/* -------------------------
+   반응형 (화면 크기에 따라 열 수 자동 변경)
+   ------------------------- */
+@media (max-width: 1024px) {
+  .image-grid { column-count: 2; }
+}
+
+@media (max-width: 600px) {
+  .image-grid { column-count: 1; }
+}
+
+/* -------------------------
+   📸 라이트박스 (이미지 클릭 시 확대 보기)
+   ------------------------- */
+#lightbox {
+  position: fixed;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  cursor: zoom-out;
+}
+
+#lightbox.active {
+  display: flex;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
